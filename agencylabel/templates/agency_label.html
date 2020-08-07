@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1 class="display-3"></h1>
+{% for area in areas %}
+  {{ area.name }}
+  <br>
+  {% for icon in area.icons.all %}
+    {{forloop.counter}}. {{ icon }}
+  {% endfor %}
+  <br>
+  {% for warning in area.warnings.all %}
+  <li>{{ warning }}</li>
+  {% endfor %}
+
+{% endfor %}
+
+<form method="post">
+  {% csrf_token %}
+  <label>Part NO:</label>
+  <input type="text" name="part_number" value="1810B0258101">
+
+  <label for="dimension">Dimension:</label>
+  <select name="dimension">
+  {% for size in sizes %}
+  <option value={{size.category}} >{{size.category}}</option>
+  {% endfor %}
+  </select>
+
+  <label for="companylogo">Company:</label>
+  <select name="companylogo">
+  {% for companylogo in companylogos %}
+  <option value={{companylogo.name}} >{{companylogo.name}}</option>
+  {% endfor %}
+  </select>
+
+  <label for="madein">Made in:</label>
+  <select name="madein">
+  {% for madein in madeins %}
+  <option value={{madein.name}} >{{madein.name}}</option>
+  {% endfor %}
+  </select>
+
+  <label for="icon">Icon:</label>
+  <select multiple="multiple" size="5" name="icon">
+  {% for icon in icons %}
+  <option value={{icon.name}} >{{icon.name}}</option>
+  {% endfor %}
+  </select>
+  <br>
+  <label for="warning">Warning:</label>
+  <select name="warning" multiple>
+  {% for warning in warnings %}
+  <option value={{warning.name}} >{{warning.name}}</option>
+  {% endfor %}
+  </select>
+
+  <label>Server
+    <input type="checkbox" name="server" checked>
+  </label>
+
+  <label>Rule Model Name:</label>
+  <input type="text" name="rule_model_name" value="TPS-I010">
+
+  <label>Model Name:</label>
+  <input type="text" name="model_name" size="30" value="HPE ProLiant DL360 Gen10 Plus">
+
+  <br>
+  <label for="Power Rating">Power Rating: </label>
+  <textarea rows = "4" cols = "40" name="power_rating_1">
+110-120Vac 56/60Hz 12A(x2)
+200-240Vac 50/60Hz 10A(x2)
+OR 240Vdc</textarea>
+
+  <label for="Power Rating 2">Power Rating 2:</label>
+  <input type="text" name="power_rating_2" value="10A(x2)"></input>
+
+  <button type="submit">Submit</button>
+</form>
+
+<br>
+<!--
+  <img src="{% static '../media/agency_label/1810B0264701_A_20200212_No_Right_Side_PS.jpg' %}">
+-->
+
+<img src="{{img_url}}">
+<br>
+
+<a href="{{img_url}}" download>Download Image</a><br>
+
+
+{% endblock %}

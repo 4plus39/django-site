@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h3>Icon</h3>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    Part Number: <input type="text" name="icon_part_no">
+    Name: <input type="text" name="icon_name">
+    Certification Unit: <input type="text" name="icon_Cert_unit">
+    <br><br>
+    Image: <input type="file" name="icon_img">
+    <button type="submit">Save</button>
+    <hr>
+    <h3>Warning</h3>
+    {% csrf_token %}
+    Part Number: <input type="text" name="warning_part_no">
+    Name: <input type="text" name="warning_name">
+    <br><br>
+    Image: <input type="file" name="warning_img">
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

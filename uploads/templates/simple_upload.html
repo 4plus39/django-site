@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    TXT file:
+    <input type="file" name="files">
+    BOM file:
+    <input type="file" name="files">
+    <button type="submit">Upload</button>
+  </form>
+
+  <br>
+  {% if message %}
+    <h5>{{ message }}</h5>
+  {% endif %}
+
+  {% for uploaded_file_url in uploaded_file_url_lst %}
+    <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a><br>
+  {% endfor %}
+
+
+{% endblock %}
